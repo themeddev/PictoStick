@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Hero from './pages/Welcome/Hero.vue';
 import GenerateSticker from './pages/GenerateSticker/Index.vue';
+import Nekosia from './pages/Nekosia/Index.vue';
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: '/generate-sticker',
     name: 'generate-sticker',
     component: GenerateSticker
+  },
+  {
+    path: '/generate-nekosia',
+    name: 'generate-nekosia',
+    component: Nekosia
   }
 ];
 

@@ -23,8 +23,11 @@ import { RouterLink } from 'vue-router'
             <p class="text-base text-body-color dark:text-dark-6 mb-3">
               Start using our AI sticker generator!
             </p>
-            <RouterLink :to="{ name: 'generate-sticker' }">
+            <!-- <RouterLink :to="{ name: 'generate-sticker' }">
               <PrimaryButton>Let's get started</PrimaryButton>
+            </RouterLink> -->
+            <RouterLink :to="{ name: 'generate-nekosia' }">
+              <PrimaryButton>nekosia</PrimaryButton>
             </RouterLink>
           </div>
        </div>

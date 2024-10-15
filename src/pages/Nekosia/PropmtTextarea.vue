@@ -1,12 +1,15 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import axios from 'axios'; // You can use axios for making HTTP requests
+import { ref, watch, onMounted } from 'vue';
 
-// Setup prompt state
-const prompt = ref(null);
+const props = defineProps({
+  prompt: String,
+  textareaRef: String,
+  imageUrl: String,
+  isLoading: Boolean,
+});
+
+const emit = defineEmits(['update:prompt']);
 const textareaRef = ref(null);
-const stickerUrl = ref(null);
-const isLoading = ref(false);
 
 // Function to resize the textarea dynamically
 const resizeTextarea = () => {
@@ -16,30 +19,14 @@ const resizeTextarea = () => {
   textarea.style.height = Math.min(textarea.scrollHeight, maxHeight) + 'px';
 };
 
-// Function to generate the sticker by calling the Flask backend
-const generateSticker = async () => {
-  if (!prompt.value) return;
-
-  isLoading.value = true;
-
-  try {
-    const response = await axios.post('http://127.0.0.1:5000/generate-sticker', {
-      prompt: prompt.value,
-    });
-
-    stickerUrl.value = response.data.output[0];
-    console.log(response.data.output);
-  } catch (error) {
-    console.error('Error generating sticker:', error);
-  } finally {
-    isLoading.value = false;
-  }
+const updatePrompt = (event) => {
+  emit('update:prompt', event.target.value);
 };
 
-// Auto-resize textarea on mount
-onMounted(() => {
+watch(() => props.prompt, () => {
   resizeTextarea();
 });
+
 </script>
 
 <template>
@@ -50,17 +37,17 @@ onMounted(() => {
   >
     <form
       class="flex h-full flex-col"
-      @submit.prevent="generateSticker"
+      @submit.prevent="$emit('generateNekosia')"
     >
       <!-- Dynamic height textarea -->
       <textarea
         ref="textareaRef"
-        v-model="prompt"
-        @input="resizeTextarea"
+        :value="prompt"
+        @input="updatePrompt"
         class="w-full resize-none rounded-md bg-transparent px-4 py-3 text-sm outline-none"
         style="max-height: 200px;"
         autofocus
-        placeholder="Enter your prompt to generate a sticker..."
+        placeholder="Enter your prompt to generate an image..."
       />
       
       <div class="flex justify-end px-4 py-3 w-full">
@@ -76,18 +63,13 @@ onMounted(() => {
           {{ isLoading ? 'Generating...' : 'Submit prompt' }}
         </button>
       </div>
-      
-      <!-- Display generated sticker -->
-      <div v-if="stickerUrl" class="mt-4 flex justify-center">
-        <img :src="stickerUrl" alt="Generated Sticker" class="max-w-full h-auto rounded-md border border-zinc-300" />
-      </div>
     </form>
   </div>
 </template>
 
 <style scoped>
-/* Optional styling adjustments */
+
 textarea {
-  overflow-y: auto; /* Adds scroll if needed after hitting max-height */
+  overflow-y: auto;
 }
 </style>

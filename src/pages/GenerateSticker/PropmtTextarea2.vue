@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import axios from 'axios'; // You can use axios for making HTTP requests
+import Replicate from 'replicate';
 
 // Setup prompt state
 const prompt = ref(null);
@@ -16,19 +16,28 @@ const resizeTextarea = () => {
   textarea.style.height = Math.min(textarea.scrollHeight, maxHeight) + 'px';
 };
 
-// Function to generate the sticker by calling the Flask backend
 const generateSticker = async () => {
   if (!prompt.value) return;
 
   isLoading.value = true;
+  
+  const replicate = new Replicate({
+    auth: import.meta.env.VUE_APP_REPLICATE_API_TOKEN 
+  });
 
   try {
-    const response = await axios.post('http://127.0.0.1:5000/generate-sticker', {
+    const input = {
       prompt: prompt.value,
-    });
+      output_quality: 100
+    };
 
-    stickerUrl.value = response.data.output[0];
-    console.log(response.data.output);
+    const output = await replicate.run(
+      'fofr/sticker-maker:4acb778eb059772225ec213948f0660867b2e03f277448f18cf1800b96a65a1a',
+      { input }
+    );
+
+    stickerUrl.value = output[0];
+    console.log(output);
   } catch (error) {
     console.error('Error generating sticker:', error);
   } finally {
