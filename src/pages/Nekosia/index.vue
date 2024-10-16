@@ -32,7 +32,9 @@
                     <div :class="`relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl w-[${responseData.metadata.original.width}px] h-[${responseData.metadata.original.height}px]`">
                         <img
                             :src="imageUrl"
-                            alt="card-image {{ responseData.category }}" class="object-cover w-full h-full" />
+                            :alt="`card-image ${ responseData.category }`" 
+                            class="object-cover w-full h-full" 
+                        />
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-2">
@@ -96,84 +98,99 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import PropmtTextarea from './PropmtTextarea.vue';
-import axios from 'axios';
+    import { ref } from 'vue';
+    import PropmtTextarea from './PropmtTextarea.vue';
+    import axios from 'axios';
 
-// State variables
-const prompt = ref('');
-const imageUrl = ref(null);
-const isLoading = ref(false);
-const responseData = ref(null);
+    // State variables
+    const prompt = ref('');
+    const imageUrl = ref(null);
+    const isLoading = ref(false);
+    const responseData = ref(null);
 
-// Method to generate the Nekosia image
-const generateNekosia = async () => {
-    if (!prompt.value) return;
+    // Method to generate the Nekosia image
+    const generateNekosia = async () => {
+        if (!prompt.value) return;
 
-    isLoading.value = true;
+        isLoading.value = true;
 
-    try {
-        // Call Nekosia API with the given prompt
-        const response = await axios.get(`https://api.nekosia.cat/api/v1/images/${prompt.value}`);
+        try {
+            // Call Nekosia API with the given prompt
+            const response = await axios.get(`https://api.nekosia.cat/api/v1/images/${prompt.value}`);
 
-        // Check if the request was successful
-        if (response.data.success) {
-            imageUrl.value = response.data.image.compressed.url;
-            responseData.value = response.data;
-        } else {
-            responseData.value = response.data; // Store error message
+            // Check if the request was successful
+            if (response.data.success) {
+                imageUrl.value = response.data.image.compressed.url;
+                responseData.value = response.data;
+            } else {
+                responseData.value = response.data; // Store error message
+            }
+        } catch (error) {
+            console.error('Error generating image:', error);
+            responseData.value = { success: false, message: 'Failed to fetch the image. Please try again.' };
+        } finally {
+            isLoading.value = false;
         }
-    } catch (error) {
-        console.error('Error generating image:', error);
-        responseData.value = { success: false, message: 'Failed to fetch the image. Please try again.' };
-    } finally {
-        isLoading.value = false;
-    }
-};
+    };
 
-// Function to start over
-const startOver = () => {
-    prompt.value = '';
-    imageUrl.value = null;
-    responseData.value = null;
-};
+    // Function to start over
+    const startOver = () => {
+        prompt.value = '';
+        imageUrl.value = null;
+        responseData.value = null;
+    };
 
-// Function to download the image
-const downloadImage = () => {
-    if (!imageUrl.value) return;
+    // Function to download the image
+    const downloadImage = () => {
+        if (!imageUrl.value) return;
 
-    const link = document.createElement('a');
-    link.href = imageUrl.value;
-    link.download = 'neko-image.png';
-    document.body.appendChild(link); 
-    link.click();
-    document.body.removeChild(link);
-    
-};
+        const link = document.createElement('a');
+        const img = document.createElement('img');
+        
+        try {
+            fetch(link.href)
+            .then(res => res.blob())
+            .then((imageFile) => {
+                const objectURL = URL.createObjectURL(imageFile);
+                img.src = objectURL;
+                document.body.appendChild(img); 
+                link.href = img.src;
+                link.download = 'neko-image.png';
+                document.body.appendChild(link); 
+                link.click();
+                document.body.removeChild(link);
+                document.body.removeChild(img);
+                return 201;
+            });   
+        }catch (e)  {
+            console.log(e);
+            return 400;
+        }        
+    };
 
-// Function to share the image
-const shareImage = async () => {
-    try {
-        await navigator.share({
-            title: 'Check out this AI-generated image',
-            text: 'Look at this amazing image I generated using Nekosia AI!',
-            url: imageUrl.value
-        });
-    } catch (error) {
-        console.error('Error sharing image:', error);
-    }
-};
+    // Function to share the image
+    const shareImage = async () => {
+        try {
+            await navigator.share({
+                title: 'Check out this AI-generated image',
+                text: 'Look at this amazing image I generated using Nekosia AI!',
+                url: imageUrl.value
+            });
+        } catch (error) {
+            console.error('Error sharing image:', error);
+        }
+    };
 </script>
 
 <style scoped>
-.animate-text-gradient {
-    background-size: 200% auto;
-    animation: shine 3s linear infinite;
-}
-
-@keyframes shine {
-    to {
-        background-position: -200% center;
+    .animate-text-gradient {
+        background-size: 200% auto;
+        animation: shine 3s linear infinite;
     }
-}
+
+    @keyframes shine {
+        to {
+            background-position: -200% center;
+        }
+    }
 </style>
