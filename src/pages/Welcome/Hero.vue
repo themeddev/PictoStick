@@ -6,7 +6,10 @@ import { RouterLink } from 'vue-router'
 <template>
     <section class="w-full h-screen bg-[url('https://images.unsplash.com/photo-1543123452-278551b0e9a7?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')]">
        <div class="w-full h-full bg-black bg-opacity-70 flex items-center">
-          <div class="mx-auto flex items-center flex-col gap-4 text-center">
+          <div 
+            class="mx-auto flex items-center flex-col gap-4 text-center"
+            v-motion-slide-visible-bottom
+          >
             <div>
               <span class="block text-lg font-semibold text-primary mb-2">
                 PictoStick

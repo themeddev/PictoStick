@@ -1,5 +1,8 @@
 <template>
-    <div class="flex flex-col items-center justify-center gap-4 h-full w-full px-[4%] md:px-[10%] py-[10%]">
+    <div 
+        class="flex flex-col items-center justify-center gap-4 h-full w-full px-[4%] md:px-[10%] py-[10%]"
+        v-motion-slide-bottom 
+    >
         <!-- Title -->
         <h2 class="text-center text-3xl font-medium text-gray-900 sm:text-6xl">
             Generate a nekosia,
@@ -28,7 +31,10 @@
         <div v-if="responseData" class="flex justify-center items-center w-full">
             <div v-if="responseData.success" class="w-full md:w-[720px] mx-auto">
                 <!-- Centering wrapper -->
-                <div class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-full">
+                <div   
+                    class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-full"
+                    v-motion-slide-bottom
+                >
                     <div :class="`relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl w-[${responseData.metadata.original.width}px] h-[${responseData.metadata.original.height}px]`">
                         <img
                             :src="imageUrl"
@@ -145,24 +151,21 @@
         if (!imageUrl.value) return;
 
         const link = document.createElement('a');
-        const img = document.createElement('img');
         
         try {
-            fetch(link.href)
+            fetch(imageUrl.value)
             .then(res => res.blob())
             .then((imageFile) => {
                 const objectURL = URL.createObjectURL(imageFile);
-                img.src = objectURL;
-                document.body.appendChild(img); 
-                link.href = img.src;
+                link.href = objectURL;
                 link.download = 'neko-image.png';
-                document.body.appendChild(link); 
+                document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-                document.body.removeChild(img);
+                URL.revokeObjectURL(objectURL);
                 return 201;
-            });   
-        }catch (e)  {
+            });
+        } catch (e)  {
             console.log(e);
             return 400;
         }        
