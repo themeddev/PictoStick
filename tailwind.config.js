@@ -11,24 +11,24 @@ export default {
       },
       keyframes: {
           'text-slide': {
-              '0%, 16%': {
-                  transform: 'translateY(0%)',
-              },
-              '20%, 36%': {
-                  transform: 'translateY(-25.66%)',
-              },
-              '40%, 56%': {
-                  transform: 'translateY(-49.33%)',
-              },
-              '60%, 76%': {
-                  transform: 'translateY(-73%)',
-              },
-              '80%, 96%': {
-                  transform: 'translateY(-99.66%)',
-              },
-              '100%': {
-                  transform: 'translateY(-99.66%)',
-              },
+            '0%, 16%': {
+                transform: 'translateY(0%)',
+            },
+            '20%, 36%': {
+                transform: 'translateY(-20.66%)',
+            },
+            '40%, 56%': {
+                transform: 'translateY(-40.33%)',
+            },
+            '60%, 76%': {
+                transform: 'translateY(-60%)',
+            },
+            '80%, 96%': {
+                transform: 'translateY(-80.66%)',
+            },
+            '100%': {
+                transform: 'translateY(-80.66%)',
+            },
           },                    
       },
     },
