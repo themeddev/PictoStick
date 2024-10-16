@@ -13,9 +13,11 @@
     "@motionone/vue": "^10.16.4",
     "@vueuse/motion": "^2.2.6",
     "axios": "^1.7.7",
+    "lightgallery": "^2.7.2",
     "motion": "^10.18.0",
     "replicate": "^1.0.0",
     "vue": "^3.5.10",
+    "vue-light-gallery": "^1.0.1",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {

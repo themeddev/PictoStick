@@ -60,6 +60,12 @@
                         <span
                             @click="startOver"
                             class="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
+                            <img src="../../assets/reset.png" class="w-5 h-5" alt="start over">
+                        </span>
+                        <!-- regenerate -->
+                        <span
+                            @click="generateNekosia"
+                            class="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
                             <img src="../../assets/startover.png" class="w-5 h-5" alt="start over">
                         </span>
                         <!-- Share Image -->
@@ -185,7 +191,7 @@
     };
 </script>
 
-<style scoped>
+<style lang="css" scoped>
     .animate-text-gradient {
         background-size: 200% auto;
         animation: shine 3s linear infinite;
