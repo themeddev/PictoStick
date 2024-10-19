@@ -1,8 +1,10 @@
 <script setup>
-    import PropmtTextarea from './PropmtTextarea.vue';
+import Breadcrumb from '../../components/Breadcrumb.vue';
+import PropmtTextarea from './PropmtTextarea.vue';
 </script>
 
 <template>
+    <Breadcrumb />
     <div 
         class="flex flex-col items-center justify-center gap-4 h-full w-full px-[4%] md:px-[10%] py-[10%]"
         v-motion-slide-bottom
@@ -17,7 +19,16 @@
 </template>
   
   
-<style scoped>
+<style lang="css" scoped>
+    .animate-text-gradient {
+        background-size: 200% auto;
+        animation: shine 3s linear infinite;
+    }
 
+    @keyframes shine {
+        to {
+            background-position: -200% center;
+        }
+    }
 </style>
   

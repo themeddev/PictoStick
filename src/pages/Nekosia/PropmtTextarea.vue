@@ -44,7 +44,7 @@ watch(() => props.prompt, () => {
         ref="textareaRef"
         :value="prompt"
         @input="updatePrompt"
-        class="w-full resize-none rounded-md bg-transparent px-4 py-3 text-sm outline-none"
+        class="w-full resize-none rounded-md bg-transparent px-4 py-3 text-sm outline-none text-zinc-500 dark:text-zinc-50"
         style="max-height: 200px;"
         autofocus
         placeholder="Enter your prompt to generate an image..."

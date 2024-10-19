@@ -1,4 +1,5 @@
 <template>
+    <Breadcrumb />
     <div 
         class="flex flex-col items-center justify-center gap-4 h-full w-full px-[4%] md:px-[10%] py-[10%]"
         v-motion-slide-bottom 
@@ -113,6 +114,7 @@
     import { ref } from 'vue';
     import PropmtTextarea from './PropmtTextarea.vue';
     import axios from 'axios';
+import Breadcrumb from '../../components/Breadcrumb.vue';
 
     // State variables
     const prompt = ref('');
