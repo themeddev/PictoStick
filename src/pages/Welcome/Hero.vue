@@ -2,12 +2,16 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import PrimaryButton from '../../components/PrimaryButton.vue';
 import { RouterLink } from 'vue-router';
+import imgUrl1 from '../../assets/heroBg1.webp'
+import imgUrl2 from '../../assets/heroBg2.avif'
+import imgUrl3 from '../../assets/heroBg3.avif'
+import imgUrl4 from '../../assets/heroBg4.avif'
 
 const images = [
-  'https://images.unsplash.com/photo-1543123452-278551b0e9a7?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  'https://images.unsplash.com/photo-1725069625011-bde91dc663af?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=1778&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  'https://images.unsplash.com/photo-1636690581110-a512fed05fd3?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  imgUrl1,
+  imgUrl2,
+  imgUrl3,
+  imgUrl4,
 ];
 
 const currentImageIndex = ref(0);
@@ -27,13 +31,13 @@ onMounted(() => {
 onBeforeUnmount(() => {
   clearInterval(interval);
 });
-console.log(backgroundImage.value);
+
 </script>
 
 
 <template>
   <section 
-    :style="{ backgroundImage: `url(${backgroundImage.value})`, transition: 'background-image 1s ease-in-out' }" 
+    :style="{ backgroundImage: `url(${backgroundImage})`, transition: 'background-image 1s ease-in-out' }" 
     class="w-full h-screen bg-cover bg-center relative"
   >
     <div class="w-full h-full bg-black bg-opacity-70 flex items-center">

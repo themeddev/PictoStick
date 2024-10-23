@@ -114,7 +114,7 @@
     import { ref } from 'vue';
     import PropmtTextarea from './PropmtTextarea.vue';
     import axios from 'axios';
-import Breadcrumb from '../../components/Breadcrumb.vue';
+    import Breadcrumb from '../../components/Breadcrumb.vue';
 
     // State variables
     const prompt = ref('');
