@@ -3,6 +3,7 @@ import Hero from './pages/Welcome/Hero.vue';
 import GenerateSticker from './pages/GenerateSticker/Index.vue';
 import Nekosia from './pages/Nekosia/index.vue';
 import NotFound from './pages/NotFound/Index.vue';
+import GenerateStory from './pages/GenerateStory/Index.vue';
 
 const routes = [
   {
@@ -23,6 +24,11 @@ const routes = [
     path: '/generate-nekosia',
     name: 'generate-nekosia',
     component: Nekosia
+  },
+  {
+    path: '/generate-story',
+    name: 'generate-story',
+    component: GenerateStory
   }
 ];
 

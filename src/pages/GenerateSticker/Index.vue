@@ -1,6 +1,6 @@
 <script setup>
 import Breadcrumb from '../../components/Breadcrumb.vue';
-import PropmtTextarea from './PropmtTextarea.vue';
+import PromptTextarea from './PromptTextarea.vue';
 </script>
 
 <template>
@@ -13,7 +13,7 @@ import PropmtTextarea from './PropmtTextarea.vue';
             <span class="animate-text-gradient inline-flex bg-gradient-to-r from-neutral-900 via-slate-500 to-neutral-500 bg-[200%_auto] bg-clip-text leading-tight text-transparent">Start using our AI sticker generator</span>
         </h2>
         <div class="mt-4 w-[97%] md:w-[90%]">
-            <PropmtTextarea />
+            <PromptTextarea />
         </div>
     </div>
 </template>

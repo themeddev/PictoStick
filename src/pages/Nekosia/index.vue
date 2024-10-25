@@ -14,7 +14,7 @@
 
         <!-- Input prompt section -->
         <div class="mt-6 w-full lg:w-[80%]">
-            <PropmtTextarea
+            <PromptTextarea
                 :prompt="prompt"
                 :imageUrl="imageUrl"
                 :isLoading="isLoading"
@@ -112,7 +112,7 @@
 
 <script setup>
     import { ref } from 'vue';
-    import PropmtTextarea from './PropmtTextarea.vue';
+    import PromptTextarea from './PromptTextarea.vue';
     import axios from 'axios';
     import Breadcrumb from '../../components/Breadcrumb.vue';
 

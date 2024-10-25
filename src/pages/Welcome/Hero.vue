@@ -56,13 +56,13 @@ onBeforeUnmount(() => {
                 <li>we are creative</li>
                 <li>sticker generator</li>
                 <li>nekosia generator</li>
-                <li>AI</li>
+                <li>story generator</li>
                 <li aria-hidden="true">we are creative</li>
               </ul>
             </span>
           </div>
           <p class="text-base text-body-color dark:text-dark-6 mb-3">
-            Start using our AI sticker generator!
+            Start using our AI generator!
           </p>
         </div>
         <div class="w-full flex flex-row flex-wrap gap-2 justify-center items-center">
@@ -71,6 +71,9 @@ onBeforeUnmount(() => {
           </RouterLink>
           <RouterLink :to="{ name: 'generate-nekosia' }">
             <PrimaryButton>Nekosia</PrimaryButton>
+          </RouterLink> 
+          <RouterLink :to="{ name: 'generate-story' }">
+            <PrimaryButton>Story</PrimaryButton>
           </RouterLink> 
         </div>
       </div>
