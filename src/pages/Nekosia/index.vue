@@ -2,7 +2,7 @@
     <Breadcrumb />
     <div 
         class="flex flex-col items-center justify-center gap-4 h-full w-full px-[4%] md:px-[10%] py-[10%]"
-        v-motion-slide-bottom 
+        v-motion-fade
     >
         <!-- Title -->
         <h2 class="text-center text-3xl font-medium text-gray-900 sm:text-6xl">
